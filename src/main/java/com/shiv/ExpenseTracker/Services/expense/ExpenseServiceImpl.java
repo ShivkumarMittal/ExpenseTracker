@@ -4,7 +4,7 @@ package com.shiv.ExpenseTracker.Services.expense;
 import java.util.Comparator;
 import java.util.List;
 import java.util.Optional;
-import java.util.stream.Collector;
+
 import java.util.stream.Collectors;
 
 import org.springframework.stereotype.Service;
@@ -74,6 +74,19 @@ public class ExpenseServiceImpl implements ExpenseService {
         else{
             throw new EntityNotFoundException("Expense not present with id"+id);
         }
+    }
+
+    public void deleteExpense(Long id)
+    {
+        Optional<Expense> optionalExpense = expenseRepository.findById(id);
+        if(optionalExpense.isPresent())
+        {
+            expenseRepository.deleteById(id);
+        }
+        else{
+            throw new EntityNotFoundException("Expense not present with id"+id);
+        }
+
     }
 
    
